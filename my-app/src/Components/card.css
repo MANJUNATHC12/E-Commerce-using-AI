@@ -1,0 +1,29 @@
+.card {
+  display: grid;
+  background: wheat;
+  border: 0.5px solid rgba(0, 0, 0, 0.12);
+  border-radius: 12px;
+  padding: 1.25rem;
+  width: 100px;
+  margin: 5px;
+  transition: border-color 0.15s;
+  cursor: pointer;
+}
+
+.card:hover {
+  border-color: rgba(0, 0, 0, 0.35);
+}
+
+.card p:first-child {
+  font-size: 15px;
+  font-weight: 500;
+  color: #111;
+  margin: 0 0 6px;
+}
+
+.card p:last-child {
+  font-size: 13px;
+  color: #666;
+  margin: 0;
+  line-height: 1.6;
+}

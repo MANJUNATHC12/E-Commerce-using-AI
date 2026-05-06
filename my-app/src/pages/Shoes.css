@@ -1,0 +1,188 @@
+.shoes-container {
+    padding: 3rem 5%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.shoes-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: #f8fafc;
+    letter-spacing: -0.02em;
+}
+
+body.light-theme .shoes-title {
+    color: #0f172a;
+}
+
+.shoes-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+}
+
+@media (max-width: 1200px) {
+    .shoes-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .shoes-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+    .shoes-title {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .shoes-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.shoe-card {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+}
+
+.shoe-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    border-color: rgba(96, 165, 250, 0.5);
+}
+
+body.light-theme .shoe-card {
+    background: rgba(30, 41, 59, 0.9);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body.light-theme .shoe-card:hover {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    border-color: rgba(59, 130, 246, 0.5);
+}
+
+.shoe-image-container {
+    height: 260px;
+    background: #f8fafc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 1rem;
+}
+
+body.light-theme .shoe-image-container {
+    background: rgba(15, 23, 42, 0.4);
+}
+
+.shoe-image-container img {
+    width: 90%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.3));
+}
+
+body.light-theme .shoe-image-container img {
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.15));
+}
+
+.shoe-card:hover .shoe-image-container img {
+    transform: scale(1.15) rotate(-5deg);
+}
+
+.shoe-details {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.shoe-brand {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #64748b;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+body.light-theme .shoe-brand {
+    color: #94a3b8;
+}
+
+.shoe-name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #0f172a;
+    margin: 0 0 1.25rem 0;
+    line-height: 1.4;
+}
+
+body.light-theme .shoe-name {
+    color: #f8fafc;
+}
+
+.shoe-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+}
+
+.shoe-price {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #60a5fa;
+}
+
+body.light-theme .shoe-price {
+    color: #2563eb;
+}
+
+.add-btn {
+    background: rgba(59, 130, 246, 0.1);
+    color: #60a5fa;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.add-btn:hover {
+    background: #3b82f6;
+    color: white;
+    border-color: #3b82f6;
+    transform: scale(1.05);
+}
+
+body.light-theme .add-btn {
+    background: rgba(37, 99, 235, 0.1);
+    color: #2563eb;
+    border-color: rgba(37, 99, 235, 0.3);
+}
+
+body.light-theme .add-btn:hover {
+    background: #2563eb;
+    color: white;
+    border-color: #2563eb;
+}
