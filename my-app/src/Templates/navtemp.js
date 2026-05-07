@@ -8,6 +8,24 @@ function Navtemp() {
     const [themeOpen, setThemeOpen] = useState(false);
     const [theme, setTheme] = useState('dark');
     const [cartCount, setCartCount] = useState(0);
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        const storedUser = localStorage.getItem("user");
+        if (storedUser) {
+            try {
+                setUser(JSON.parse(storedUser));
+            } catch (e) {
+                console.error("Failed to parse user from local storage", e);
+            }
+        }
+    }, []);
+
+    const handleLogout = () => {
+        localStorage.removeItem("user");
+        setUser(null);
+        window.location.href = "/login";
+    };
 
     const fetchCart = async () => {
         try {
@@ -71,17 +89,24 @@ function Navtemp() {
                 <li><Link to="/home" style={{ textDecoration: 'none', color: 'inherit' }}>Home</Link></li>
                 <li><Link to="/beauty" style={{ textDecoration: 'none', color: 'inherit' }}>Beauty</Link></li>
                 <li className="dropdown" onClick={() => { setProfileOpen(!profileOpen); setThemeOpen(false); }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                             <circle cx="12" cy="7" r="4"></circle>
                         </svg>
+                        {user && <span style={{ fontWeight: '600', fontSize: '0.9rem' }}>{user.name || user.email || 'Profile'}</span>}
                         <span style={{ fontSize: '0.8rem' }}>▾</span>
                     </div>
                     {profileOpen && (
                         <ul className="dropdown-menu">
-                            <li><Link to="/Login" style={{ textDecoration: 'none', color: 'inherit' }}>Login</Link></li>
-                            <li><Link to="/Register" style={{ textDecoration: 'none', color: 'inherit' }}>Register</Link></li>
+                            {user ? (
+                                <li><span className="dropdown-item" style={{ cursor: 'pointer', display: 'block' }} onClick={handleLogout}>Logout</span></li>
+                            ) : (
+                                <>
+                                    <li><Link to="/Login" style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>Login</Link></li>
+                                    <li><Link to="/Register" style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>Register</Link></li>
+                                </>
+                            )}
                         </ul>
                     )}
                 </li>

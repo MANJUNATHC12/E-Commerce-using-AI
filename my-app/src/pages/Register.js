@@ -1,6 +1,8 @@
 import Formtemp from "../Templates/formtemp";
 import { useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
+
 function Register() {
     const [formdata, setformdata] = useState({
         name: "",
@@ -19,7 +21,7 @@ function Register() {
             name: "name",
             placeholder: "Enter your name",
             value: formdata.name,
-            error: errors.name?.[0]
+            error: errors.name?.[0] || errors.Name?.[0]
         },
         {
             label: "Email*",
@@ -27,7 +29,7 @@ function Register() {
             name: "email",
             placeholder: "Enter your email",
             value: formdata.email,
-            error: errors.email?.[0]
+            error: errors.email?.[0] || errors.Email?.[0]
         },
         {
             label: "Phonenumber*",
@@ -35,7 +37,7 @@ function Register() {
             name: "phonenumber",
             placeholder: "Enter your phonenumber",
             value: formdata.phonenumber,
-            error: errors.phonenumber?.[0]
+            error: errors.phonenumber?.[0] || errors.Phonenumber?.[0]
         },
         {
             label: "Password*",
@@ -43,7 +45,7 @@ function Register() {
             name: "password",
             placeholder: "Enter your password",
             value: formdata.password,
-            error: errors.password?.[0]
+            error: errors.password?.[0] || errors.Password?.[0]
         }
     ]
 
@@ -123,7 +125,11 @@ function Register() {
             handlesubmit={handlesubmit}
             buttonText="Register"
             generalError={generalError}
-        />
+        >
+            <div style={{ marginTop: '1rem', textAlign: 'center', fontSize: '0.9rem' }}>
+                <Link to="/login" style={{ color: '#60a5fa', textDecoration: 'none' }}>Already have an account? Login here</Link>
+            </div>
+        </Formtemp>
     )
 }
 

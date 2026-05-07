@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Shoes.css';
+import LoginPopup from '../Components/LoginPopup';
 
 const SummerWear = () => {
+    const [showLoginPopup, setShowLoginPopup] = useState(false);
+
     const handleAddToCart = async (product) => {
+        const user = localStorage.getItem("user");
+        if (!user) {
+            setShowLoginPopup(true);
+            return;
+        }
         try {
             const res = await fetch("http://localhost:5164/api/cart", {
                 method: "POST",
@@ -59,6 +67,7 @@ const SummerWear = () => {
                     </div>
                 ))}
             </div>
+            <LoginPopup isOpen={showLoginPopup} onClose={() => setShowLoginPopup(false)} />
         </div>
     );
 };

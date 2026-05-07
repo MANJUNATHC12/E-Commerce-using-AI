@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using my_app_api.Data;
 using my_app_api.Models;
@@ -110,8 +110,26 @@ namespace my_app_api.Controllers
 
             return Ok(new
             {
-                name = user.Name
+                name = user.Name,
+                email = user.Email,
+                phoneNumber = user.PhoneNumber
             });
+        }
+
+        // FORGOT PASSWORD
+        [HttpPost("forgot-password")]
+        public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordDto model)
+        {
+            var user = _context.Users.FirstOrDefault(u => u.Email == model.Email);
+            if (user == null)
+            {
+                return BadRequest(new { message = "Email not found" });
+            }
+
+            user.Password = model.NewPassword;
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = "Password updated successfully" });
         }
     }
 }

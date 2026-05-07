@@ -1,6 +1,6 @@
 import "./form.css";
 import Inputfield from "./Inputfield";
-function Formtemp({ fields, formdata, handlechange, handlesubmit, buttonText, generalError }) {
+function Formtemp({ fields, formdata, handlechange, handlesubmit, buttonText, generalError, children }) {
     return (
         <div className="form-page">
             <form onSubmit={handlesubmit}>
@@ -24,6 +24,7 @@ function Formtemp({ fields, formdata, handlechange, handlesubmit, buttonText, ge
                     />
                 ))}
                 <button type="submit">{buttonText}</button>
+                {children}
             </form>
         </div>
     );

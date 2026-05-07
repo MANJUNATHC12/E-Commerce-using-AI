@@ -1,11 +1,14 @@
 import { useState } from "react";
 import Formtemp from "../Templates/formtemp";
 import axios from "axios";
+import { Link } from "react-router-dom";
 function Login() {
     const [formdata, setformdata] = useState({
         email: "",
         password: ""
-    })
+    });
+    const [errors, setErrors] = useState({});
+    const [generalError, setGeneralError] = useState("");
 
     const fields = [
         {
@@ -14,6 +17,7 @@ function Login() {
             name: "email",
             placeholder: "Enter your email",
             value: formdata.email,
+            error: errors.email?.[0] || errors.Email?.[0]
         },
         {
             label: "Password*",
@@ -21,6 +25,7 @@ function Login() {
             name: "password",
             placeholder: "Enter your password",
             value: formdata.password,
+            error: errors.password?.[0] || errors.Password?.[0]
         }
     ]
 
@@ -43,11 +48,22 @@ function Login() {
         }
         catch (error) {
             console.log(error);
+            if (error.response && error.response.data) {
+                if (error.response.data.errors) {
+                    setErrors(error.response.data.errors);
+                }
+                
+                if (error.response.data.message) {
+                    setGeneralError(error.response.data.message);
+                }
+
+                if (typeof error.response.data === "string") {
+                    setGeneralError(error.response.data);
+                }
+            } else {
+                setGeneralError("An error occurred");
+            }
         }
-        setformdata({
-            email: "",
-            password: ""
-        })
     }
     return (
         <Formtemp
@@ -56,7 +72,13 @@ function Login() {
             handlechange={handlechange}
             handlesubmit={handlesubmit}
             buttonText="Login"
-        />
+            generalError={generalError}
+        >
+            <div style={{ marginTop: '1rem', display: 'flex', justifyContent: 'space-between', fontSize: '0.9rem' }}>
+                <Link to="/forgot-password" style={{ color: '#60a5fa', textDecoration: 'none' }}>Forgot Password?</Link>
+                <Link to="/register" style={{ color: '#60a5fa', textDecoration: 'none' }}>Don't have an account?</Link>
+            </div>
+        </Formtemp>
 
     );
 }

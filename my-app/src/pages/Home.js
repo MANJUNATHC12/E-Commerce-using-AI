@@ -1,13 +1,40 @@
 import { useEffect, useState } from "react";
 import "./Home.css";
+import LoginPopup from "../Components/LoginPopup";
 
 function Home() {
     const [user, setUser] = useState(null);
+    const [showLoginPopup, setShowLoginPopup] = useState(false);
 
     useEffect(() => {
         const data = JSON.parse(localStorage.getItem("user"));
         setUser(data);
     }, []);
+
+    const handleAddToCart = async (product) => {
+        const userStr = localStorage.getItem("user");
+        if (!userStr) {
+            setShowLoginPopup(true);
+            return;
+        }
+        try {
+            const res = await fetch("http://localhost:5164/api/cart", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    name: product.name,
+                    brand: product.category,
+                    price: product.price,
+                    img: product.image
+                })
+            });
+            if (res.ok) {
+                window.dispatchEvent(new Event('cartUpdated'));
+            }
+        } catch (error) {
+            console.error("Failed to add to cart", error);
+        }
+    };
 
     const products = [
         {
@@ -88,12 +115,13 @@ function Home() {
                             <h3 className="product-name">{product.name}</h3>
                             <div className="product-footer">
                                 <span className="product-price">{product.price}</span>
-                                <button className="add-to-cart-btn">Add to Cart</button>
+                                <button className="add-to-cart-btn" onClick={() => handleAddToCart(product)}>Add to Cart</button>
                             </div>
                         </div>
                     </div>
                 ))}
             </div>
+            <LoginPopup isOpen={showLoginPopup} onClose={() => setShowLoginPopup(false)} />
         </div>
     );
 }
