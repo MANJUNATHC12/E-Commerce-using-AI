@@ -1,5 +1,5 @@
 import Formtemp from "../Templates/formtemp";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
@@ -10,6 +10,16 @@ function Register() {
         phonenumber: "",
         password: ""
     })
+
+    const nameref = useRef(null);
+    const emailref = useRef(null);
+    const phonenumberref = useRef(null);
+    const passwordref = useRef(null);
+
+
+    // useEffect(() => {
+    //     document.title = "Register | Myapp";
+    // }, [])
 
     const [errors, setErrors] = useState({});
     const [generalError, setGeneralError] = useState("");
@@ -62,6 +72,8 @@ function Register() {
         // }
         // else {
 
+
+
         try {
             const response = await axios.post(
                 "http://localhost:5164/api/auth/register",
@@ -82,23 +94,32 @@ function Register() {
             setErrors({});
             setGeneralError("");
 
+            setformdata({
+                name: "",
+                email: "",
+                phonenumber: "",
+                password: ""
+            })
+            console.log(formdata);
+
         } catch (error) {
             // ✅ Handle validation errors
             if (error.response && error.response.data) {
-
-                // Model validation errors
-                // if (error.response.data.errors) {
-                //     setErrors(error.response.data.errors);
-                // }
-
-                // // Custom error (email exists)
-                // else if (error.response.data.message) {
-                //     setErrors({ email: [error.response.data.message] });
-                // }
-
                 // ✅ Field-wise validation errors
-                if (error.response.data.errors) {
-                    setErrors(error.response.data.errors);
+                const serverErrors = error.response.data.errors;
+                if (serverErrors) {
+                    setErrors(serverErrors);
+
+                    // Focus the first field with an error
+                    if (serverErrors.Name || serverErrors.name) {
+                        nameref.current?.focus();
+                    } else if (serverErrors.Email || serverErrors.email) {
+                        emailref.current?.focus();
+                    } else if (serverErrors.Phonenumber || serverErrors.phonenumber) {
+                        phonenumberref.current?.focus();
+                    } else if (serverErrors.Password || serverErrors.password) {
+                        passwordref.current?.focus();
+                    }
                 }
 
                 // ✅ General error (like "All fields mandatory")
@@ -108,14 +129,6 @@ function Register() {
             }
         }
 
-        // }
-        setformdata({
-            name: "",
-            email: "",
-            phonenumber: "",
-            password: ""
-        })
-        console.log(formdata);
     }
     return (
         <Formtemp
@@ -125,6 +138,10 @@ function Register() {
             handlesubmit={handlesubmit}
             buttonText="Register"
             generalError={generalError}
+            nameref={nameref}
+            emailref={emailref}
+            phonenumberref={phonenumberref}
+            passwordref={passwordref}
         >
             <div style={{ marginTop: '1rem', textAlign: 'center', fontSize: '0.9rem' }}>
                 <Link to="/login" style={{ color: '#60a5fa', textDecoration: 'none' }}>Already have an account? Login here</Link>

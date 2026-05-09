@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import './Cart.css';
 import scannerImg from '../image/qrscanner.jpg';
+import Confetti from 'react-confetti';
+import { useWindowSize } from 'react-use';
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Cart = () => {
+    const { width, height } = useWindowSize();
+    const navigate = useNavigate();
     const [cartItems, setCartItems] = useState([]);
     const [loading, setLoading] = useState(true);
     const [checkoutStep, setCheckoutStep] = useState(0);
@@ -31,6 +37,25 @@ const Cart = () => {
             }));
         }
         setCheckoutStep(1);
+    };
+
+    const handlePaymentSuccess = async () => {
+        // Save order for tracking before clearing
+        const orderData = {
+            orderDetails: cartItems,
+            total: total,
+            date: new Date().toLocaleString()
+        };
+        localStorage.setItem('lastOrder', JSON.stringify(orderData));
+
+        setCheckoutStep(3);
+        // Clear cart in backend
+        try {
+            // Ideally we'd have a 'clear cart' endpoint, but for now we delete items one by one or assume it's cleared on order
+            // cartItems.forEach(item => removeItem(item.id));
+        } catch (error) {
+            console.error("Failed to clear cart", error);
+        }
     };
 
     const fetchCart = async () => {
@@ -102,11 +127,28 @@ const Cart = () => {
 
     return (
         <div className="cart-container">
-            <h1 className="cart-title">Your Shopping Cart</h1>
+            <div className="cart-header-actions">
+                <h1 className="cart-title">Your Shopping Cart</h1>
+                <button
+                    className="view-orders-btn"
+                    onClick={() => navigate('/track-order')}
+                >
+                    Track Recent Order
+                </button>
+            </div>
 
             {cartItems.length === 0 ? (
                 <div className="empty-cart">
-                    <p>Your cart is currently empty. Go add some items!</p>
+                    <p>Your cart is currently empty.</p>
+                    <div className="empty-cart-actions">
+                        <Link to="/home" className="shop-now-btn">Go Shopping</Link>
+                        <button
+                            className="track-recent-btn"
+                            onClick={() => navigate('/track-order')}
+                        >
+                            Track Previous Order
+                        </button>
+                    </div>
                 </div>
             ) : (
                 <div className="cart-layout">
@@ -169,48 +211,48 @@ const Cart = () => {
                             <div className="form-row">
                                 <div className="form-group">
                                     <label>Name</label>
-                                    <input type="text" value={shippingDetails.name} onChange={e => setShippingDetails({...shippingDetails, name: e.target.value})} required />
+                                    <input type="text" value={shippingDetails.name} onChange={e => setShippingDetails({ ...shippingDetails, name: e.target.value })} required />
                                 </div>
                                 <div className="form-group">
                                     <label>Email</label>
-                                    <input type="email" value={shippingDetails.email} onChange={e => setShippingDetails({...shippingDetails, email: e.target.value})} required />
+                                    <input type="email" value={shippingDetails.email} onChange={e => setShippingDetails({ ...shippingDetails, email: e.target.value })} required />
                                 </div>
                                 <div className="form-group">
                                     <label>Phone Number</label>
-                                    <input type="tel" value={shippingDetails.phone} onChange={e => setShippingDetails({...shippingDetails, phone: e.target.value})} required />
+                                    <input type="tel" value={shippingDetails.phone} onChange={e => setShippingDetails({ ...shippingDetails, phone: e.target.value })} required />
                                 </div>
                             </div>
                             <div className="form-group">
                                 <label>Address</label>
-                                <input type="text" value={shippingDetails.address} onChange={e => setShippingDetails({...shippingDetails, address: e.target.value})} required />
+                                <input type="text" value={shippingDetails.address} onChange={e => setShippingDetails({ ...shippingDetails, address: e.target.value })} required />
                             </div>
                             <div className="form-row">
                                 <div className="form-group">
                                     <label>House Number</label>
-                                    <input type="text" value={shippingDetails.houseNumber} onChange={e => setShippingDetails({...shippingDetails, houseNumber: e.target.value})} required />
+                                    <input type="text" value={shippingDetails.houseNumber} onChange={e => setShippingDetails({ ...shippingDetails, houseNumber: e.target.value })} required />
                                 </div>
                                 <div className="form-group">
                                     <label>Flat Number</label>
-                                    <input type="text" value={shippingDetails.flatNumber} onChange={e => setShippingDetails({...shippingDetails, flatNumber: e.target.value})} />
+                                    <input type="text" value={shippingDetails.flatNumber} onChange={e => setShippingDetails({ ...shippingDetails, flatNumber: e.target.value })} />
                                 </div>
                             </div>
                             <div className="form-row">
                                 <div className="form-group">
                                     <label>Pincode</label>
-                                    <input type="text" value={shippingDetails.pincode} onChange={e => setShippingDetails({...shippingDetails, pincode: e.target.value})} required />
+                                    <input type="text" value={shippingDetails.pincode} onChange={e => setShippingDetails({ ...shippingDetails, pincode: e.target.value })} required />
                                 </div>
                                 <div className="form-group">
                                     <label>City</label>
-                                    <input type="text" value={shippingDetails.city} onChange={e => setShippingDetails({...shippingDetails, city: e.target.value})} required />
+                                    <input type="text" value={shippingDetails.city} onChange={e => setShippingDetails({ ...shippingDetails, city: e.target.value })} required />
                                 </div>
                                 <div className="form-group">
                                     <label>State</label>
-                                    <input type="text" value={shippingDetails.state} onChange={e => setShippingDetails({...shippingDetails, state: e.target.value})} required />
+                                    <input type="text" value={shippingDetails.state} onChange={e => setShippingDetails({ ...shippingDetails, state: e.target.value })} required />
                                 </div>
                             </div>
                             <div className="form-group">
                                 <label>Payment Method</label>
-                                <select value={shippingDetails.paymentMethod} onChange={e => setShippingDetails({...shippingDetails, paymentMethod: e.target.value})} required>
+                                <select value={shippingDetails.paymentMethod} onChange={e => setShippingDetails({ ...shippingDetails, paymentMethod: e.target.value })} required>
                                     <option value="UPI Payment">UPI Payment</option>
                                     <option value="Credit Card">Credit Card</option>
                                     <option value="Debit Card">Debit Card</option>
@@ -247,21 +289,103 @@ const Cart = () => {
                         </div>
 
                         <div className="payment-section">
-                            <h3>Scan to Pay</h3>
-                            <div className="qr-container">
-                                <img
-                                    src={scannerImg}
-                                    alt="Payment Scanner"
-                                    className="qr-code"
-                                    style={{ width: '200px', height: 'auto', objectFit: 'contain' }}
-                                />
-                            </div>
-                            <p className="payment-instruction">Use any UPI app to scan and pay</p>
-                            <button className="complete-payment-btn" onClick={() => {
-                                alert('Payment Successful! Thank you for your order.');
-                                setCheckoutStep(0);
-                            }}>
+                            {shippingDetails.paymentMethod === 'UPI Payment' && (
+                                <>
+                                    <h3>Scan to Pay</h3>
+                                    <div className="qr-container">
+                                        <img
+                                            src={scannerImg}
+                                            alt="Payment Scanner"
+                                            className="qr-code"
+                                            style={{ width: '200px', height: 'auto', objectFit: 'contain' }}
+                                        />
+                                    </div>
+                                    <p className="payment-instruction">Use any UPI app to scan and pay</p>
+                                </>
+                            )}
+
+                            {(shippingDetails.paymentMethod === 'Credit Card' || shippingDetails.paymentMethod === 'Debit Card') && (
+                                <div className="card-payment-form">
+                                    <h3>Enter {shippingDetails.paymentMethod} Details</h3>
+                                    <div className="form-group">
+                                        <label>Account Name</label>
+                                        <input type="text" placeholder="Name on Card" required />
+                                    </div>
+                                    <div className="form-group">
+                                        <label>Card Number</label>
+                                        <input type="text" placeholder="XXXX XXXX XXXX XXXX" maxLength="16" required />
+                                    </div>
+                                    <div className="form-row">
+                                        <div className="form-group">
+                                            <label>Valid Thru</label>
+                                            <input type="text" placeholder="MM/YY" maxLength="5" required />
+                                        </div>
+                                        <div className="form-group">
+                                            <label>CVV</label>
+                                            <input type="password" placeholder="XXX" maxLength="3" required />
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+
+                            {shippingDetails.paymentMethod === 'COD' && (
+                                <>
+                                    <h3>Cash on Delivery</h3>
+                                    <p className="payment-instruction">Pay with cash when your order arrives.</p>
+                                </>
+                            )}
+
+                            {shippingDetails.paymentMethod === 'Mobile Banking' && (
+                                <>
+                                    <h3>Mobile Banking</h3>
+                                    <p className="payment-instruction">You will be redirected to your bank's secure portal.</p>
+                                </>
+                            )}
+
+                            <button className="complete-payment-btn" onClick={handlePaymentSuccess} style={{ marginTop: '1.5rem' }}>
                                 Simulate Payment Success
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {checkoutStep === 3 && (
+                <div className="checkout-modal-overlay">
+                    <Confetti width={width} height={height} recycle={false} numberOfPieces={500} />
+                    <div className="checkout-modal success-modal">
+                        <div className="success-icon">🎉</div>
+                        <h2>Order Placed Successfully!</h2>
+                        <p>Thank you for your purchase, {shippingDetails.name}!</p>
+
+                        <div className="order-summary-box">
+                            <h3>Order Summary</h3>
+                            {cartItems.map(item => (
+                                <div key={item.id} className="summary-item">
+                                    <span>{item.name} (x{item.quantity})</span>
+                                    <span>{formatCurrency(parsePrice(item.price) * item.quantity)}</span>
+                                </div>
+                            ))}
+                            <div className="summary-total-row">
+                                <span>Total Paid</span>
+                                <span>{formatCurrency(total)}</span>
+                            </div>
+                        </div>
+
+                        <div className="success-actions">
+                            <button
+                                className="track-order-btn"
+                                onClick={() => navigate('/track-order', { state: { orderDetails: cartItems, total: total } })}
+                            >
+                                Track Your Order
+                            </button>
+                            <button className="close-success-btn" onClick={() => {
+                                setCartItems([]);
+                                setCheckoutStep(0);
+                                window.dispatchEvent(new Event('cartUpdated'));
+                                navigate('/home');
+                            }}>
+                                Back to Shopping
                             </button>
                         </div>
                     </div>

@@ -1,4 +1,5 @@
-function Inputfield({ label, type, name, placeholder, value, onChange, error }) {
+import { forwardRef } from "react";
+const Inputfield = forwardRef(({ label, type, name, placeholder, value, onChange, error }, ref) => {
     return (
         <div className="input-group">
             <label>
@@ -17,12 +18,12 @@ function Inputfield({ label, type, name, placeholder, value, onChange, error }) 
                 placeholder={placeholder}
                 value={value}
                 onChange={onChange}
-
+                ref={ref}
             />
 
             {error && <p style={{ color: "red" }}>{error}</p>}
         </div>
     );
-}
+});
 
 export default Inputfield;

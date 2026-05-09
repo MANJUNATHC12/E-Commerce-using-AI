@@ -22,6 +22,11 @@ namespace my_app_api.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterDto model)
         {
+
+            if (model == null)
+            {
+                return BadRequest(new { message = "Please provide all the details" });
+            }
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState); // 👈 this will show exact error

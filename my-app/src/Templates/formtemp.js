@@ -1,6 +1,17 @@
 import "./form.css";
 import Inputfield from "./Inputfield";
-function Formtemp({ fields, formdata, handlechange, handlesubmit, buttonText, generalError, children }) {
+function Formtemp({ fields, formdata, handlechange, handlesubmit, buttonText, generalError, children, nameref, emailref, phonenumberref, passwordref }) {
+    const getref = (fieldname) => {
+        if (fieldname === "name") {
+            return nameref;
+        } else if (fieldname === "email") {
+            return emailref;
+        } else if (fieldname === "phonenumber") {
+            return phonenumberref;
+        } else if (fieldname === "password") {
+            return passwordref;
+        }
+    }
     return (
         <div className="form-page">
             <form onSubmit={handlesubmit}>
@@ -20,6 +31,7 @@ function Formtemp({ fields, formdata, handlechange, handlesubmit, buttonText, ge
                         placeholder={field.placeholder}
                         value={formdata[field.name]}
                         onChange={handlechange}
+                        ref={getref(field.name)}
                         error={field.error}
                     />
                 ))}

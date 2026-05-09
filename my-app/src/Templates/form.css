@@ -63,6 +63,16 @@ form input {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Prevent autofill from changing background to white */
+form input:-webkit-autofill,
+form input:-webkit-autofill:hover, 
+form input:-webkit-autofill:focus, 
+form input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px #0f172a inset !important;
+    -webkit-text-fill-color: #f8fafc !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
 form input:focus {
     border-color: #3b82f6;
     background: rgba(0, 0, 0, 0.4);

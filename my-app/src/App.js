@@ -15,6 +15,7 @@ import SportWear from './pages/SportWear';
 import TraditionalWear from './pages/TraditionalWear';
 import Cart from './pages/Cart';
 import Men from './pages/Men';
+import TrackOrder from './pages/TrackOrder';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 
@@ -38,6 +39,7 @@ function App() {
           <Route path="/men/sport-wear" element={<SportWear />} />
           <Route path="/men/traditional" element={<TraditionalWear />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/track-order" element={<TrackOrder />} />
         </Routes>
       </BrowserRouter>
 
