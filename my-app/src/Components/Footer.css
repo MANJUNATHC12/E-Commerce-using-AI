@@ -1,0 +1,404 @@
+/* ========================================
+   Footer — Glassmorphism Dark Theme
+   ======================================== */
+
+.site-footer {
+    position: relative;
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.95) 0%, rgba(2, 6, 23, 1) 100%);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    color: #cbd5e1;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    overflow: hidden;
+    margin-top: auto;
+}
+
+/* Decorative glow */
+.footer-glow {
+    position: absolute;
+    top: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 160px;
+    background: radial-gradient(ellipse, rgba(59, 130, 246, 0.12) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Main grid container */
+.footer-container {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1.4fr;
+    gap: 2.5rem;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 3.5rem 2rem 2.5rem;
+}
+
+/* ---- Sections ---- */
+.footer-section {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Brand */
+.footer-brand {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #f8fafc;
+    margin: 0 0 0.75rem;
+    letter-spacing: -0.03em;
+    background: linear-gradient(135deg, #60a5fa, #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.footer-tagline {
+    font-size: 0.88rem;
+    line-height: 1.65;
+    color: #94a3b8;
+    margin: 0 0 1.25rem;
+}
+
+/* Social icons */
+.footer-socials {
+    display: flex;
+    gap: 10px;
+}
+
+.social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #94a3b8;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+    background: rgba(59, 130, 246, 0.2);
+    border-color: rgba(59, 130, 246, 0.4);
+    color: #60a5fa;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+}
+
+/* ---- Links columns ---- */
+.footer-heading {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #f1f5f9;
+    margin: 0 0 1.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.footer-heading::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 28px;
+    height: 2px;
+    background: linear-gradient(90deg, #3b82f6, #a78bfa);
+    border-radius: 2px;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.footer-links li a {
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 0.88rem;
+    transition: all 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    position: relative;
+    padding-left: 0;
+}
+
+.footer-links li a::before {
+    content: '';
+    display: inline-block;
+    width: 0;
+    height: 1px;
+    background: #60a5fa;
+    transition: width 0.3s ease;
+    vertical-align: middle;
+}
+
+.footer-links li a:hover {
+    color: #60a5fa;
+    padding-left: 4px;
+}
+
+.footer-links li a:hover::before {
+    width: 12px;
+}
+
+/* ---- Newsletter ---- */
+.newsletter-text {
+    font-size: 0.88rem;
+    color: #94a3b8;
+    line-height: 1.6;
+    margin: 0 0 1rem;
+}
+
+.newsletter-form {
+    display: flex;
+    gap: 0;
+    margin-bottom: 1.25rem;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.04);
+    transition: border-color 0.3s ease;
+}
+
+.newsletter-form:focus-within {
+    border-color: rgba(96, 165, 250, 0.5);
+    box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.1);
+}
+
+.newsletter-input {
+    flex: 1;
+    padding: 11px 14px;
+    background: transparent;
+    border: none;
+    color: #f8fafc;
+    font-size: 0.85rem;
+    outline: none;
+    min-width: 0;
+}
+
+.newsletter-input::placeholder {
+    color: #64748b;
+}
+
+.newsletter-btn {
+    padding: 11px 20px;
+    background: linear-gradient(135deg, #3b82f6, #6366f1);
+    color: #fff;
+    border: none;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.newsletter-btn:hover {
+    background: linear-gradient(135deg, #2563eb, #4f46e5);
+    box-shadow: 0 4px 14px rgba(59, 130, 246, 0.3);
+}
+
+/* Contact items */
+.footer-contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.82rem;
+    color: #94a3b8;
+}
+
+.contact-item svg {
+    flex-shrink: 0;
+    color: #60a5fa;
+}
+
+/* ========================================
+   Bottom Bar
+   ======================================== */
+.footer-bottom {
+    position: relative;
+    z-index: 1;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.footer-bottom-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 1.25rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.copyright {
+    font-size: 0.8rem;
+    color: #64748b;
+    margin: 0;
+}
+
+.copyright strong {
+    color: #94a3b8;
+}
+
+.footer-bottom-links {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.footer-bottom-links a {
+    font-size: 0.8rem;
+    color: #64748b;
+    text-decoration: none;
+    transition: color 0.25s ease;
+}
+
+.footer-bottom-links a:hover {
+    color: #60a5fa;
+}
+
+.footer-bottom-links .divider {
+    color: rgba(255, 255, 255, 0.1);
+    font-size: 0.75rem;
+}
+
+/* ========================================
+   Light Theme Overrides
+   ======================================== */
+body.light-theme .site-footer {
+    background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%);
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    color: #475569;
+}
+
+body.light-theme .footer-glow {
+    background: radial-gradient(ellipse, rgba(59, 130, 246, 0.06) 0%, transparent 70%);
+}
+
+body.light-theme .footer-brand {
+    background: linear-gradient(135deg, #2563eb, #7c3aed);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+body.light-theme .footer-tagline,
+body.light-theme .newsletter-text,
+body.light-theme .footer-links li a,
+body.light-theme .contact-item {
+    color: #64748b;
+}
+
+body.light-theme .footer-heading {
+    color: #0f172a;
+}
+
+body.light-theme .footer-links li a:hover {
+    color: #2563eb;
+}
+
+body.light-theme .footer-links li a:hover::before {
+    background: #2563eb;
+}
+
+body.light-theme .social-icon {
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    color: #64748b;
+}
+
+body.light-theme .social-icon:hover {
+    background: rgba(59, 130, 246, 0.1);
+    border-color: rgba(59, 130, 246, 0.3);
+    color: #2563eb;
+}
+
+body.light-theme .newsletter-form {
+    background: rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body.light-theme .newsletter-input {
+    color: #0f172a;
+}
+
+body.light-theme .newsletter-input::placeholder {
+    color: #94a3b8;
+}
+
+body.light-theme .footer-bottom {
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+body.light-theme .copyright {
+    color: #94a3b8;
+}
+
+body.light-theme .copyright strong {
+    color: #475569;
+}
+
+body.light-theme .footer-bottom-links a {
+    color: #94a3b8;
+}
+
+body.light-theme .footer-bottom-links a:hover {
+    color: #2563eb;
+}
+
+body.light-theme .footer-bottom-links .divider {
+    color: rgba(0, 0, 0, 0.1);
+}
+
+body.light-theme .contact-item svg {
+    color: #2563eb;
+}
+
+/* ========================================
+   Responsive
+   ======================================== */
+@media (max-width: 1024px) {
+    .footer-container {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 2.5rem 1.5rem 2rem;
+    }
+
+    .footer-bottom-inner {
+        flex-direction: column;
+        text-align: center;
+        padding: 1rem 1.5rem;
+    }
+
+    .footer-glow {
+        width: 300px;
+    }
+}

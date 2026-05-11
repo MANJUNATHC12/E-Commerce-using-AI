@@ -2,6 +2,7 @@ import './App.css';
 // import Eventcard from './Components/eventcard';
 // import Practice from './demo/practice';
 import Navbar from './Components/navbar';
+import Footer from './Components/Footer';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import ForgotPassword from './pages/ForgotPassword';
@@ -41,6 +42,7 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/track-order" element={<TrackOrder />} />
         </Routes>
+        <Footer />
       </BrowserRouter>
 
     </>

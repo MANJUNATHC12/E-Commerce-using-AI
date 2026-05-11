@@ -1,0 +1,66 @@
+<h1 id="project-daily-changelog">Project Daily Changelog</h1>
+<p>This document summarizes the recent updates made to the project,
+detailing which pages were modified and the context behind the changes
+based on the repository’s commit history.</p>
+<h2 id="may-9-2026-added-track-order">May 9, 2026: “added track
+order”</h2>
+<p><strong>Overview</strong>: This update focused on implementing a new
+“Track Order” feature and refining the existing user interface and
+authentication endpoints.</p>
+<p><strong>Pages &amp; Files Updated</strong>: -
+<code>my-app/src/pages/TrackOrder.js</code> &amp; <code>.css</code>
+(New): Added the new page to allow users to track their orders. -
+<code>my-app/src/App.js</code>: Updated routing to include the new
+<code>/track-order</code> endpoint. -
+<code>my-app/src/pages/Cart.js</code> &amp; <code>.css</code>: Modified
+to likely link to the track order page or improve the post-purchase
+experience. - <code>my-app/src/pages/Register.js</code>: Updated logic
+or styling for the user registration form. -
+<code>my-app/src/Templates/Inputfield.js</code>,
+<code>formtemp.js</code>, <code>form.css</code>: Refined the reusable
+form templates and input fields. -
+<code>my-app-api/Controllers/AuthController.cs</code>: Backend
+authentication controller was updated, possibly to support enhanced
+validation or order tracking associations.</p>
+<h2 id="may-7-2026-added-some-forms">May 7, 2026: “added some
+forms”</h2>
+<p><strong>Overview</strong>: A significant frontend update introducing
+forgot password functionality, a login popup, and updates across
+multiple product category pages.</p>
+<p><strong>Pages &amp; Files Updated</strong>: -
+<code>my-app/src/pages/ForgotPassword.js</code> (New): Added the Forgot
+Password page to complete the authentication flow. -
+<code>my-app/src/Components/LoginPopup.js</code> &amp; <code>.css</code>
+(New): Added a new interactive popup component for user login. -
+<code>my-app/src/pages/Login.js</code>, <code>Register.js</code>,
+<code>Home.js</code>: Updated to integrate the new forms and overall
+logic. - <code>my-app/src/pages/Shoes.js</code>,
+<code>SportWear.js</code>, <code>SummerWear.js</code>,
+<code>TraditionalWear.js</code>, <code>WinterWear.js</code>: The
+individual product category pages were modified, likely to improve
+layout or implement new styling designs. -
+<code>my-app/src/pages/Cart.js</code> &amp; <code>.css</code>: Cart
+experience enhancements. - <code>my-app/src/App.js</code>,
+<code>navtemp.js</code>, <code>formtemp.js</code>: Core layout and
+routing updates to incorporate new pages. -
+<code>my-app-api/Models/ForgotPasswordDto.cs</code> (New): Backend model
+to support the password reset request. -
+<code>my-app-api/Models/LoginDto.cs</code>, <code>RegisterDto.cs</code>,
+<code>AuthController.cs</code>: Updated DTOs and endpoints for
+authentication requests. - <code>my-app/image/qrscanner.jpg</code>
+(New): Added a QR scanner image resource.</p>
+<h2 id="may-6-2026-added-initial-setup">May 6, 2026: “added” (Initial
+Setup)</h2>
+<p><strong>Overview</strong>: This represents the initial massive commit
+establishing the foundation of the project.</p>
+<p><strong>Major Components Included</strong>: - <strong>Backend
+(<code>my-app-api</code>)</strong>: Set up the complete ASP.NET Core API
+with Entity Framework Core, PostgreSQL database configuration,
+AuthController, CartController, and corresponding models (User,
+CartItem, RegisterDto, LoginDto). - <strong>Frontend
+(<code>my-app</code>)</strong>: Set up the React application including
+<code>react-router-dom</code>, reusable templates (navtemp, formtemp,
+card), UI components (Navbar, Eventcard), and the full suite of pages
+(<code>Home</code>, <code>About</code>, <code>Contact</code>,
+<code>Men</code>, <code>Shoes</code>, <code>Cart</code>,
+<code>Login</code>, <code>Register</code>, etc.).</p>
