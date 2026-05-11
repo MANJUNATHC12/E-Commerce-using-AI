@@ -2,6 +2,15 @@
 
 This document summarizes the recent updates made to the project, detailing which pages were modified and the context behind the changes based on the repository's commit history.
 
+## May 11, 2026: "added footer"
+**Overview**: A comprehensive design update that introduces a beautiful, glassmorphism-styled footer component to the web application.
+
+**Pages & Files Updated**:
+- `my-app/src/Components/Footer.js` & `.css` (New): Created a modern, dark-themed footer with a glassmorphism aesthetic, social media links, newsletter subscription, and decorative glowing elements.
+- `my-app/src/App.js`: Updated to incorporate the new `<Footer />` component globally, ensuring it appears across all routed pages.
+- `my-app/src/Templates/navtemp.css`: Minor styling tweaks made to the navigation to ensure cohesive design alongside the newly introduced footer.
+- `changelog.md` & `changelog.html` & `Demoproject daily changes document.docx` (New): Documentation added to summarize project progress.
+
 ## May 9, 2026: "added track order"
 **Overview**: This update focused on implementing a new "Track Order" feature and refining the existing user interface and authentication endpoints.
 

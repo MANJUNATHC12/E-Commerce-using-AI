@@ -1,66 +1,260 @@
-<h1 id="project-daily-changelog">Project Daily Changelog</h1>
-<p>This document summarizes the recent updates made to the project,
-detailing which pages were modified and the context behind the changes
-based on the repository’s commit history.</p>
-<h2 id="may-9-2026-added-track-order">May 9, 2026: “added track
-order”</h2>
-<p><strong>Overview</strong>: This update focused on implementing a new
-“Track Order” feature and refining the existing user interface and
-authentication endpoints.</p>
-<p><strong>Pages &amp; Files Updated</strong>: -
-<code>my-app/src/pages/TrackOrder.js</code> &amp; <code>.css</code>
-(New): Added the new page to allow users to track their orders. -
-<code>my-app/src/App.js</code>: Updated routing to include the new
-<code>/track-order</code> endpoint. -
-<code>my-app/src/pages/Cart.js</code> &amp; <code>.css</code>: Modified
-to likely link to the track order page or improve the post-purchase
-experience. - <code>my-app/src/pages/Register.js</code>: Updated logic
-or styling for the user registration form. -
-<code>my-app/src/Templates/Inputfield.js</code>,
-<code>formtemp.js</code>, <code>form.css</code>: Refined the reusable
-form templates and input fields. -
-<code>my-app-api/Controllers/AuthController.cs</code>: Backend
-authentication controller was updated, possibly to support enhanced
-validation or order tracking associations.</p>
-<h2 id="may-7-2026-added-some-forms">May 7, 2026: “added some
-forms”</h2>
-<p><strong>Overview</strong>: A significant frontend update introducing
-forgot password functionality, a login popup, and updates across
-multiple product category pages.</p>
-<p><strong>Pages &amp; Files Updated</strong>: -
-<code>my-app/src/pages/ForgotPassword.js</code> (New): Added the Forgot
-Password page to complete the authentication flow. -
-<code>my-app/src/Components/LoginPopup.js</code> &amp; <code>.css</code>
-(New): Added a new interactive popup component for user login. -
-<code>my-app/src/pages/Login.js</code>, <code>Register.js</code>,
-<code>Home.js</code>: Updated to integrate the new forms and overall
-logic. - <code>my-app/src/pages/Shoes.js</code>,
-<code>SportWear.js</code>, <code>SummerWear.js</code>,
-<code>TraditionalWear.js</code>, <code>WinterWear.js</code>: The
-individual product category pages were modified, likely to improve
-layout or implement new styling designs. -
-<code>my-app/src/pages/Cart.js</code> &amp; <code>.css</code>: Cart
-experience enhancements. - <code>my-app/src/App.js</code>,
-<code>navtemp.js</code>, <code>formtemp.js</code>: Core layout and
-routing updates to incorporate new pages. -
-<code>my-app-api/Models/ForgotPasswordDto.cs</code> (New): Backend model
-to support the password reset request. -
-<code>my-app-api/Models/LoginDto.cs</code>, <code>RegisterDto.cs</code>,
-<code>AuthController.cs</code>: Updated DTOs and endpoints for
-authentication requests. - <code>my-app/image/qrscanner.jpg</code>
-(New): Added a QR scanner image resource.</p>
-<h2 id="may-6-2026-added-initial-setup">May 6, 2026: “added” (Initial
-Setup)</h2>
-<p><strong>Overview</strong>: This represents the initial massive commit
-establishing the foundation of the project.</p>
-<p><strong>Major Components Included</strong>: - <strong>Backend
-(<code>my-app-api</code>)</strong>: Set up the complete ASP.NET Core API
-with Entity Framework Core, PostgreSQL database configuration,
-AuthController, CartController, and corresponding models (User,
-CartItem, RegisterDto, LoginDto). - <strong>Frontend
-(<code>my-app</code>)</strong>: Set up the React application including
-<code>react-router-dom</code>, reusable templates (navtemp, formtemp,
-card), UI components (Navbar, Eventcard), and the full suite of pages
-(<code>Home</code>, <code>About</code>, <code>Contact</code>,
-<code>Men</code>, <code>Shoes</code>, <code>Cart</code>,
-<code>Login</code>, <code>Register</code>, etc.).</p>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Daily Changelog</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --text-color: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent-color: #3b82f6;
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 2rem;
+            margin: 0;
+            background-image: radial-gradient(circle at 50% -20%, rgba(59, 130, 246, 0.15), transparent 60%);
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p.subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .changelog-entry {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: transform 0.2s ease;
+        }
+
+        .changelog-entry:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .entry-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        h2 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: #e2e8f0;
+        }
+
+        .date-badge {
+            background: rgba(59, 130, 246, 0.2);
+            color: #93c5fd;
+            padding: 0.4rem 1rem;
+            border-radius: 999px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        h3 {
+            font-size: 1.1rem;
+            color: #cbd5e1;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--text-muted);
+        }
+
+        li::before {
+            content: "•";
+            color: var(--accent-color);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        code {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 0.9em;
+            color: #bae6fd;
+        }
+
+        .new-badge {
+            background: rgba(16, 185, 129, 0.2);
+            color: #6ee7b7;
+            font-size: 0.75rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            margin-left: 0.5rem;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Project Daily Changelog</h1>
+            <p class="subtitle">A comprehensive, living document summarizing the latest architectural, design, and
+                feature updates across the e-commerce application.</p>
+        </header>
+
+        <!-- May 11, 2026 -->
+        <div class="changelog-entry">
+            <div class="entry-header">
+                <h2>Added Footer Components</h2>
+                <span class="date-badge">May 11, 2026</span>
+            </div>
+            <p><strong>Overview:</strong> A comprehensive design update that introduces a beautiful,
+                glassmorphism-styled footer component to the web application, closing the loop on the main UI layout.
+            </p>
+
+            <h3>Pages & Files Updated:</h3>
+            <ul>
+                <li><code>my-app/src/Components/Footer.js</code> & <code>.css</code> <span
+                        class="new-badge">New</span><br>Created a modern, dark-themed footer with a glassmorphism
+                    aesthetic, social media links, newsletter subscription, and decorative glowing elements.</li>
+                <li><code>my-app/src/App.js</code><br>Updated to incorporate the new <code>&lt;Footer /&gt;</code>
+                    component globally, ensuring it appears securely at the bottom of all routed pages.</li>
+                <li><code>my-app/src/Templates/navtemp.css</code><br>Minor styling tweaks made to the navigation to
+                    ensure cohesive design alongside the newly introduced footer.</li>
+                <li><code>changelog.md</code> & <code>changelog.html</code> <span
+                        class="new-badge">New</span><br>Documentation added to summarize project progress in real-time.
+                </li>
+            </ul>
+        </div>
+
+        <!-- May 9, 2026 -->
+        <div class="changelog-entry">
+            <div class="entry-header">
+                <h2>Added Track Order Feature</h2>
+                <span class="date-badge">May 9, 2026</span>
+            </div>
+            <p><strong>Overview:</strong> This update focused on implementing a new "Track Order" feature and refining
+                the existing user interface and authentication endpoints.</p>
+
+            <h3>Pages & Files Updated:</h3>
+            <ul>
+                <li><code>my-app/src/pages/TrackOrder.js</code> & <code>.css</code> <span
+                        class="new-badge">New</span><br>Added the new page to allow users to visually track their active
+                    orders.</li>
+                <li><code>my-app/src/App.js</code><br>Updated routing to include the new <code>/track-order</code>
+                    endpoint.</li>
+                <li><code>my-app/src/pages/Cart.js</code> & <code>.css</code><br>Modified to link directly to the track
+                    order page and dramatically improve the post-purchase celebration experience.</li>
+                <li><code>my-app/src/pages/Register.js</code><br>Updated validation logic and styling for the user
+                    registration form.</li>
+                <li><code>my-app/src/Templates/Inputfield.js</code>, <code>formtemp.js</code>,
+                    <code>form.css</code><br>Refined the reusable form templates and input fields to support dynamic
+                    error states.</li>
+                <li><code>my-app-api/Controllers/AuthController.cs</code><br>Backend authentication controller was
+                    updated to support enhanced validation logic and improved error messaging.</li>
+            </ul>
+        </div>
+
+        <!-- May 7, 2026 -->
+        <div class="changelog-entry">
+            <div class="entry-header">
+                <h2>Added Authentication Forms & Popups</h2>
+                <span class="date-badge">May 7, 2026</span>
+            </div>
+            <p><strong>Overview:</strong> A significant frontend update introducing forgot password functionality, a
+                login popup, and comprehensive updates across multiple product category pages.</p>
+
+            <h3>Pages & Files Updated:</h3>
+            <ul>
+                <li><code>my-app/src/pages/ForgotPassword.js</code> <span class="new-badge">New</span><br>Added the
+                    Forgot Password page to complete the secure authentication flow.</li>
+                <li><code>my-app/src/Components/LoginPopup.js</code> & <code>.css</code> <span
+                        class="new-badge">New</span><br>Added a new interactive popup component for streamlined user
+                    login directly from the navigation bar.</li>
+                <li><code>my-app/src/pages/Login.js</code>, <code>Register.js</code>, <code>Home.js</code><br>Updated to
+                    integrate the new forms, glassmorphism design language, and overall application logic.</li>
+                <li>Product Category Pages<br><code>Shoes.js</code>, <code>SportWear.js</code>,
+                    <code>SummerWear.js</code>, <code>TraditionalWear.js</code>, <code>WinterWear.js</code> were
+                    completely overhauled to improve layout, implement new styling designs, and render dynamic product
+                    cards.</li>
+                <li><code>my-app-api/Models/ForgotPasswordDto.cs</code> <span class="new-badge">New</span><br>Backend
+                    model to support the password reset request handling.</li>
+                <li><code>my-app-api/Models/LoginDto.cs</code>, <code>RegisterDto.cs</code>,
+                    <code>AuthController.cs</code><br>Updated DTOs and endpoints for processing strong authentication
+                    requests.</li>
+            </ul>
+        </div>
+
+        <!-- May 6, 2026 -->
+        <div class="changelog-entry">
+            <div class="entry-header">
+                <h2>Initial Setup & Architecture</h2>
+                <span class="date-badge">May 6, 2026</span>
+            </div>
+            <p><strong>Overview:</strong> This represents the initial massive commit establishing the foundation and
+                core architecture of the e-commerce project.</p>
+
+            <h3>Major Components Included:</h3>
+            <ul>
+                <li><strong>Backend (<code>my-app-api</code>)</strong><br>Set up the complete ASP.NET Core API with
+                    Entity Framework Core, PostgreSQL database configuration, AuthController, CartController, and
+                    corresponding domain models (User, CartItem, RegisterDto, LoginDto).</li>
+                <li><strong>Frontend (<code>my-app</code>)</strong><br>Set up the React application including
+                    <code>react-router-dom</code>, reusable design templates (navtemp, formtemp, card), UI components
+                    (Navbar, Eventcard), and the full suite of initial pages.</li>
+            </ul>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
